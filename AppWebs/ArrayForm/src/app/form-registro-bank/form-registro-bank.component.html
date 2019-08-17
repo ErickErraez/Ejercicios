@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-6">
+            <h3>Registro Libro Biblioteca</h3>
+
+            <br>
+            <form [formGroup]="registroForm">
+                <div class="form-group">
+                    <label>Autores</label>
+                    <div formArrayName="autores">
+                        <div *ngFor="let item of getAutores.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                            <input type="text" formControlName="autores"> <button type="button" class="btn btn-danger" (click)="delAutores(pointIndex)">Borrar</button>
+                            <br>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" (click)="addAutores()">Añadir</button>
+                </div>
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" id="titulo" class="form-control" formControlName="titulo" />
+                    <div class="error" *ngIf="registroForm.controls.titulo.invalid && (registroForm.controls.titulo.dirty || registroForm.controls.titulo.touched)">
+                        <span *ngIf="registroForm.controls.titulo.errors.required">Nombre es
+              requerido</span>
+                        <br>
+                        <span *ngIf="registroForm.controls.titulo.errors.minlength">Nombre tiene menos de
+              3</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Editorial</label>
+                    <div formArrayName="editorial">
+                        <div *ngFor="let item of getEditorial.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                            <input type="text" formControlName="editorial"> <button type="button" class="btn btn-danger" (click)="delEditorial(pointIndex)">Borrar</button>
+                            <br>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" (click)="addEditorial()">Añadir</button>
+                </div>
+                <div class="form-group">
+                    <label>Materia</label>
+                    <input type="text" id="materia" class="form-control" formControlName="materia" />
+                    <div class="error" *ngIf="registroForm.controls.materia.invalid && (registroForm.controls.materia.dirty || registroForm.controls.materia.touched)">
+                        <span *ngIf="registroForm.controls.materia.errors.required">Nombre es
+              requerido</span>
+                        <br>
+                        <span *ngIf="registroForm.controls.materia.errors.minlength">Nombre tiene menos de
+              3</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary" (click)="submit()">Registrarme</button>
+                    <button type="button" class="btn btn-danger">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

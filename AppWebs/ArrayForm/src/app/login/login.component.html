@@ -1,0 +1,49 @@
+<div class="form-container">
+    <h1>Formulario Reactivo</h1>
+    <br>
+    <br>
+    <form [formGroup]="loginForm">
+        <input type="text" data-role="input" formControlName="nombre" placeholder="">
+        <div class="error" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <span class="tally primary" *ngIf="nombre.errors.required">Nombre es requerido</span>
+            <br>
+            <span class="tally primary" *ngIf="nombre.errors,minlength">Nombre tiene menos de 3</span>
+        </div>
+        <br>
+        <input type="email" data-role="input" formControlName="email" placeholder="">
+        <div class="error" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <span class="tally primary" *ngIf="email.errors.required">Email es requerido</span>
+            <br>
+            <span class="tally primary" *ngIf="email.errors,minlength">Email no valido</span>
+            <br>
+            <span class="tally primary" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.pattern">
+                Email debe tener 5 caracteres
+            </span>
+        </div>
+        <br>
+        <br>
+        <input type="password" data-role="input" formControlName="password" placeholder="" [ngClass]="{'Error': password.errors}">
+        <div class="error" *ngIf="password.invalid && (password.dirty || password.touched)">
+            <span class="tally primary" *ngIf="password.errors.required">Contrasena es requerido</span>
+            <br>
+            <br>
+            <span class="tally " *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.pattern">
+                Contrasena debe tener 5 digitos
+                Almenos una Mayuscula
+                No debe contener espacios
+                Debe contener almenos un signo
+            </span>
+        </div>
+        <br>
+        <textarea type="text" data-role="input" formControlName="mensaje" placeholder="Escriba su mensaje"></textarea>
+        <div class="error" *ngIf="mensaje.invalid && (mensaje.dirty || mensaje.touched)">
+            <span class="tally primary" *ngIf="mensaje.errors.required">Mensaje es requerido</span>
+            <br>
+            <span class="tally primary" *ngIf="mensaje.errors,minlength">Debe tener mas de 20 caracteres</span>
+            <br>
+            <span class="tally primary" *ngIf="mensaje.errors,maxlength">Debe tener menos de 100 caracteres</span>
+        </div>
+        <br>
+        <button type="submit" class="button primary large" (click)="validar()" [disabled]="!loginForm.valid">Enviar</button>
+    </form>
+</div>
